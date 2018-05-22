@@ -8,7 +8,7 @@ var findMin = function(nums) {
     while (start + 1 < end) {
         var middle = Math.floor((start+end)/2);
         if (nums[middle] > nums[end])
-            start = middle;
+            start = middle + 1;
         else
             end = middle;
     } 
