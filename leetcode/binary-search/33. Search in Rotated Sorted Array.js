@@ -7,7 +7,6 @@
 var search = function(nums, target) {
     if(nums.length === 0)
         return -1;
-
     var start = 0, end = nums.length - 1;
     while (start <= end) {
         var middle = Math.floor((start+end)/2);
