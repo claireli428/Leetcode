@@ -1,3 +1,5 @@
+//10/02/2018
+
 var quickSort = function(nums) {
     if(nums.length < 2)
         return nums;
