@@ -33,3 +33,34 @@ var longestPalindrome = function (s) {
     return s.substr(start, maxLen);
 
 };
+
+//dynamic programming solution
+var longestPalindrome = function (s) {
+    var start = 0, maxLen = 1, dp = new Array(s.length).fill(false).map(() => {return new Array(s.length).fill(false)});
+
+    //From start
+    for (var r = 0; r < s.length; r++) {
+        for(var l = r; l >= 0; l--) {
+            dp[l][r] = s[l] === s[r] && (r - l < 3 || dp[l+1][r-1]);
+            
+            if(dp[l][r] && r - l + 1 > maxLen) {
+                start = l;
+                maxLen = r - l + 1;
+            }
+        }
+    }
+
+    // From end
+    // for (var l = s.length - 1; l >= 0; l--) {
+    //     for(var r = l; r < s.length; r++) {
+    //         dp[l][r] = s[l] === s[r] && (r - l < 3 || dp[l+1][r-1]);
+            
+    //         if(dp[l][r] && r - l + 1 > maxLen) {
+    //             start = l;
+    //             maxLen = r - l + 1;
+    //         }
+    //     }
+    // }
+
+    return s.substr(start, max);
+};
