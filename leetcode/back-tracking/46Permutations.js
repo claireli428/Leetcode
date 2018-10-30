@@ -16,9 +16,10 @@ var permuteHelper = function(remains, res, visited) {
     }
 
     for(let j = 0; j < remains.length; j++) {
-        const newVisited = [...visited, remains[j]];
-        const newRemains = [...remains.slice(0, j), ...remains.slice(j+1)];
-        permuteHelper(newRemains, res, newVisited);
+        visited.push(remains[j]);
+        const newRemains = [...remains.slice(0, j), ...remains.slice(j + 1)];
+        permuteHelper(newRemains, res, visited.slice(0));
+        visited.pop();
     }
 
 }
