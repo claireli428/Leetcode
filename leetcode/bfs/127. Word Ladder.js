@@ -4,13 +4,6 @@
  * @param {string[]} wordList
  * @return {number}
  */
-
-/**
- * @param {string} beginWord
- * @param {string} endWord
- * @param {string[]} wordList
- * @return {number}
- */
 var ladderLength = function (beginWord, endWord, wordList) {
     if (!wordList.includes(endWord)) return 0;
 
