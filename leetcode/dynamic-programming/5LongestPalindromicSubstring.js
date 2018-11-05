@@ -36,31 +36,22 @@ var longestPalindrome = function (s) {
 
 //dynamic programming solution
 var longestPalindrome = function (s) {
-    var start = 0, maxLen = 1, dp = new Array(s.length).fill(false).map(() => {return new Array(s.length).fill(false)});
+    if (s.length <= 1)
+        return s;
 
-    //From start
-    for (var r = 0; r < s.length; r++) {
-        for(var l = r; l >= 0; l--) {
-            dp[l][r] = s[l] === s[r] && (r - l < 3 || dp[l+1][r-1]);
-            
-            if(dp[l][r] && r - l + 1 > maxLen) {
-                start = l;
-                maxLen = r - l + 1;
+    let start = 0, maxLen = 1;
+    let dp = new Array(s.length).fill(null).map(() => new Array(s.length).fill(false));
+
+    for (let i = s.length - 1; i >= 0; i--) {
+        for (let j = i; j < s.length; j++) {
+            dp[i][j] = s[i] === s[j] && (j - i < 3 || dp[i + 1][j - 1]);
+
+            if (dp[i][j] && j - i + 1 > maxLen) {
+                start = i;
+                maxLen = j - i + 1;
             }
         }
     }
-
-    // From end
-    // for (var l = s.length - 1; l >= 0; l--) {
-    //     for(var r = l; r < s.length; r++) {
-    //         dp[l][r] = s[l] === s[r] && (r - l < 3 || dp[l+1][r-1]);
-            
-    //         if(dp[l][r] && r - l + 1 > maxLen) {
-    //             start = l;
-    //             maxLen = r - l + 1;
-    //         }
-    //     }
-    // }
 
     return s.substr(start, maxLen);
 };
