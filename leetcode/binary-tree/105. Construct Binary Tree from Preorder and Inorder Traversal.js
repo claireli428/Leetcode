@@ -18,7 +18,7 @@ var buildTreeHelper = function(preorder, preStart, inorder, inStart, inEnd) {
   if(preStart > preorder.length - 1 || inStart > inEnd) return null;
 
   let root = new TreeNode(preorder[preStart]);
-  let rootInIdx = inorder.indexOf(preorder[preStart]);
+  const rootInIdx = inorder.indexOf(preorder[preStart]);
   root.left = buildTreeHelper(preorder, preStart + 1, inorder, inStart, rootInIdx - 1);
   root.right = buildTreeHelper(preorder, preStart + rootInIdx - inStart + 1, inorder, rootInIdx + 1, inEnd);
   return root;
