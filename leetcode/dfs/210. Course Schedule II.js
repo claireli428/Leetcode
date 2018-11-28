@@ -3,7 +3,10 @@
  * @param {number[][]} prerequisites
  * @return {number[]}
  */
- 
+
+//BFS
+
+
 //DFS
 var findOrder = function(numCourses, prerequisites) {
   const { graph, starts } = constructGraph(numCourses, prerequisites);
@@ -21,11 +24,11 @@ var canFinishHelper = function (res, visited, graph, start) {
   if(visited.has(start) && !res.includes(start)) return false;
 
   visited.add(start);
-  let indegrees = graph.get(start);
-  if(indegrees) {
-    for(let indegree of indegrees.values()) {
-      if(!res.includes(indegree)) {
-        if(!canFinishHelper(res, visited, graph, indegree)) return false;
+  let outdegrees = graph.get(start);
+  if(outdegrees) {
+    for(let outdegree of outdegrees.values()) {
+      if(!res.includes(outdegree)) {
+        if(!canFinishHelper(res, visited, graph, outdegree)) return false;
       }
     }
   }
