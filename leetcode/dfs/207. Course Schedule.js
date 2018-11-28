@@ -22,10 +22,10 @@ var exploreCycle = function (memo, visited, graph, start) {
   if (visited.has(start)) return false;
 
   visited.add(start);
-  let indegrees = graph.get(start);
-  if (indegrees) {
-    for (let indegree of indegrees.values()) {
-      if (!exploreCycle(memo, visited, graph, indegree)) return false;
+  let outdegrees = graph.get(start);
+  if (outdegrees) {
+    for (let outdegree of outdegrees.values()) {
+      if (!exploreCycle(memo, visited, graph, outdegree)) return false;
     }
   }
 
