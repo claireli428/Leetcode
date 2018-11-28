@@ -24,8 +24,8 @@ var exploreCycle = function (memo, visited, graph, start) {
   visited.add(start);
   let outdegrees = graph.get(start);
   if (outdegrees) {
-    for (let outdegree of outdegrees.values()) {
-      if (!exploreCycle(memo, visited, graph, outdegree)) return false;
+    for (let vertex of outdegrees.values()) {
+      if (!exploreCycle(memo, visited, graph, vertex)) return false;
     }
   }
 
@@ -42,10 +42,10 @@ var constructGraph = function (numCourses, prerequisites) {
   for (let i = 0; i < prerequisites.length; i++) {
     if (starts.has(prerequisites[i][1])) starts.delete(prerequisites[i][1]);
 
-    const key = prerequisites[i][0];
-    let values = graph.has(key) ? graph.get(key) : new Set();
-    values.add(prerequisites[i][1]);
-    graph.set(key, values);
+    const vertex = prerequisites[i][0];
+    let outdegrees = graph.has(vertex) ? graph.get(vertex) : new Set();
+    outdegrees.add(prerequisites[i][1]);
+    graph.set(vertex, outdegrees);
   }
 
   return { graph: graph, starts: starts };
