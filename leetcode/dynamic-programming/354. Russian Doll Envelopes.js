@@ -2,38 +2,6 @@
  * @param {number[][]} envelopes
  * @return {number}
  */
-
-//==========================BS============================
-var maxEnvelopes = function (envelopes) {
-  if (envelopes.length <= 1) return envelopes.length;
-
-  let { width, height } = getMiddle(envelopes);
-  let left = [], right = [];
-  for (let i = 0; i < envelopes.length; i++) {
-    if(envelopes[i][0] < width && envelopes[i][1] < height) {
-      left.push(envelopes[i]);
-    }
-    if(envelopes[i][0] > width && envelopes[i][1] > height) {
-      right.push(envelopes[i]);
-    }
-  }
-
-  return maxEnvelopes(left) + maxEnvelopes(right);
-};
-
-var getMiddle = function (envelopes) {
-  let minW = Number.MAX_SAFE_INTEGER, minH = Number.MAX_SAFE_INTEGER;
-  let maxW = 0, maxH = 0;
-  for (let i = 0; i < envelopes.length; i++) {
-    minW = Math.min(minW, envelopes[i][0]);
-    minH = Math.min(minH, envelopes[i][1]);
-    maxW = Math.max(maxW, envelopes[i][0]);
-    maxH = Math.max(maxH, envelopes[i][1]);
-  }
-
-  return { width: Math.floor((minW + maxW) / 2), height: Math.floor((minH + maxH) / 2) };
-}
-
 //===================DP=========================
 var maxEnvelopes = function (envelopes) {
   if (envelopes.length <= 1) return envelopes.length;
