@@ -1,13 +1,13 @@
+
 /**
- * @param m: An integer m denotes the size of a backpack
- * @param A: Given n items with size A[i]
- * @return: The maximum size
- * 
- * dp[i][w] : max value achieved with i items and weight w
- * dp[i][w] = Max(dp[i - 1][w], dp[i - 1][w - A[i - 1]] + V[i - 1])
+ * Given n items with size A[i] and value V[i]
+ * and a backpack with size m. 
+ * What's the maximum value can you put into the backpack?
+ * Example
+ * Given 4 items with size [2, 3, 5, 7] and value [1, 5, 2, 4],
+ * and a backpack with size 10. The maximum value is 9
  */
-//Rolling Array
-const backPack = function (m, A, V) {
+const backPackII = function (m, A, V) {
   let n = A.length;
   let dp = new Array(m + 1).fill(0);
 
