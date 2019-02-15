@@ -55,3 +55,33 @@ var longestPalindrome = function (s) {
 
     return s.substr(start, maxLen);
 };
+
+//memorized recursive
+var longestPalindrome = function (s) {
+  let memo = new Map();
+  return helper(s, 0, s.length - 1, memo);
+};
+
+var helper = function (s, i, j, memo) {
+  if (i > j) return "";
+  if (i === j) return s[i];
+
+  let cur = s.substring(i, j + 1);
+  if (memo.has(cur)) return memo.get(cur);
+
+  let left = helper(s, i, j - 1, memo);
+  let right = helper(s, i + 1, j, memo);
+  let middle = helper(s, i + 1, j - 1, memo);
+
+  let str = left;
+  if (right.length > str.length) str = right;
+  if (middle.length > str.length) str = middle;
+
+  if (s[i] === s[j] && middle.length === j - i - 1) {
+    memo.set(cur, cur);
+    return cur;
+  }
+
+  memo.set(cur, str);
+  return str;
+};
