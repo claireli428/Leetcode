@@ -53,3 +53,41 @@ var largestRectangleArea = function (heights) {
   return res;
 
 };
+
+// class Solution {
+//     public int largestRectangleArea(int[] heights) {
+//         int res = 0;
+//         Stack<Integer> stack = new Stack<Integer>();
+        
+        
+//         int[] nextLess = new int[heights.length];
+//         for(int i = 0; i < heights.length; i++) {
+//             while(!stack.empty() && heights[stack.peek()] > heights[i]) {
+//                 int idx = stack.pop();
+//                 nextLess[idx] = i;
+//             }
+            
+//             stack.push(i);
+//             nextLess[i] = heights.length;
+//         }
+        
+//         while(!stack.empty()) stack.pop();
+        
+//         int[] preLess = new int[heights.length];
+//         for(int i = heights.length - 1; i >= 0; i--) {
+//             while(!stack.empty() && heights[stack.peek()] > heights[i]) {
+//                 int idx = stack.pop();
+//                 preLess[idx] = i;
+//             }
+            
+//             stack.push(i);
+//             preLess[i] = -1; 
+//         }
+        
+//         for(int i = 0; i < heights.length; i++) {
+//             res = Math.max(res, heights[i] * (nextLess[i] - preLess[i] - 1));
+//         }
+        
+//         return res;
+//     }
+// }
