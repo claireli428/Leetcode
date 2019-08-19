@@ -10,37 +10,34 @@
  * @return {boolean}
  */
 var isBalanced = function (root) {
-    if (!root || (!root.left && !root.right)) return true;
+    if (!root) return true;
 
-    if (!root.left && root.right && (root.right.left || root.right.right)) return false;
+    // return getBalancedHeight(root) !== -1;
 
-    if (!root.right && root.left && (root.left.left || root.left.right)) return false;
+    let leftH = getHeight(root.left);
+    let rightH = getHeight(root.right);
 
-    return isBalanced(root.left) && isBalanced(root.right) && Math.abs(treeDepth(root.left) - treeDepth(root.right)) < 2
+    if (Math.abs(leftH - rightH) > 1) return false;
+
+    return isBalanced(root.left) && isBalanced(root.right);
 };
 
-var treeDepth = function (root) {
+var getHeight = function (root) {
     if (!root) return 0;
 
-    if (!root.left && !root.right) return 1;
-
-    return 1 + Math.max(treeDepth(root.left), treeDepth(root.right));
-}
-
-var isBalanced = function (root) {
-    return bottomUpHeight(root) !== -1
+    return Math.max(getHeight(root.left), getHeight(root.right)) + 1;
 };
 
-var bottomUpHeight = function (root) {
-    if(!root) return 0;
+var getBalancedHeight = function (root) {
+    if (!root) return 0;
 
-    const leftH = bottomUpHeight(root.left);
-    if(leftH === -1) return -1;
-    const rightH = bottomUpHeight(root.right);
-    if(rightH === -1) return -1;
+    let left = getBalancedHeight(root.left);
+    if (left === -1) return -1;
 
-    if(Math.abs(leftH - rightH) > 1) return -1;
+    let right = getBalancedHeight(root.right);
+    if (right === -1) return -1;
 
-    return Math.max(leftH, rightH) + 1;
-}
+    if (Math.abs(left - right) > 1) return -1;
 
+    return Math.max(left, right) + 1;
+};
